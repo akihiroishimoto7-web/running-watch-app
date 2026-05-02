@@ -45,7 +45,7 @@
 | レビュー記事（5モデル分） | ✅ 完成（テキストのみ・画像未配置） |
 | 戻るボタン | ✅ 完成 |
 | レスポンシブ対応 | ✅ スマホ最適 |
-| SEO（title/description/OG） | ✅ ページ単位で設定済み |
+| SEO（title/description/OG/sitemap/favicon） | ✅ ページ単位で設定済み |
 | 静的書き出し | ✅ `output: "export"` |
 | Netlifyデプロイ | ✅ 運用中 |
 | 商品画像 | ⏳ `public/reviews/` に手動配置待ち |

@@ -23,6 +23,10 @@
 │   ├── Diagnosis.jsx           # 診断UI本体（'use client'）
 │   ├── data.js                 # 質問・モデル・診断ロジック
 │   ├── reviews.js              # レビュー記事コンテンツ
+│   ├── sitemap.js              # sitemap.xml
+│   ├── robots.js               # robots.txt
+│   ├── icon.svg                # favicon
+│   ├── apple-icon.png          # apple-touch-icon
 │   ├── globals.css             # Tailwind + アニメーション
 │   └── review/
 │       └── [slug]/
@@ -94,6 +98,9 @@ diagnoseStep2(answers: ("YES"|"NO")[], step1Type): modelKey
 | `/review/forerunner-965/` | SSG |
 | `/review/coros-pace-3/` | SSG |
 | `/review/apple-watch/` | SSG |
+| `/compare/garmin-vs-applewatch/` | 静的（Garmin / Apple Watch 比較） |
+| `/sitemap.xml` | SEO（App Router metadata route） |
+| `/robots.txt` | SEO（App Router metadata route） |
 
 `trailingSlash: true` のため URL は必ず末尾スラッシュ付き。
 

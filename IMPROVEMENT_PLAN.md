@@ -83,8 +83,8 @@
 
 ### P0
 - [ ] Google Search Console 登録
-- [ ] sitemap.xml 自動生成（`next-sitemap` または手書き）
-- [ ] favicon / apple-touch-icon の追加
+- [x] sitemap.xml 自動生成（App Router の `app/sitemap.js` で対応）
+- [x] favicon / apple-touch-icon の追加（`app/icon.svg` / `app/apple-icon.png`）
 
 ### P1
 - [ ] 各レビューに JSON-LD `Product` schema
