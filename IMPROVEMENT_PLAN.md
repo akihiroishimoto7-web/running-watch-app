@@ -38,7 +38,7 @@
   - `data.js` の `models[*].links` に `amazon` / `rakuten` / `moshimo` フィールドを追加
   - `FinalResultScreen` と `ReviewPage` 末尾にCTAボタン3つ並べる
   - リンクには `rel="sponsored noopener"` を付与
-- [ ] 比較記事 `/compare/garmin-vs-applewatch/` を作成（現状リンク先 `#`）
+- [x] 比較記事 `/compare/garmin-vs-applewatch/` を作成（診断結果からリンク済み）
 
 ### P1
 - [ ] 比較表ページ：5モデルを横並びで比較できる `/compare/all/`

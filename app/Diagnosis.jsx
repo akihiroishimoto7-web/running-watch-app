@@ -351,12 +351,12 @@ function Step1ResultScreen({ type, onNext, onReset }) {
         >
           おすすめモデルを見る
         </button>
-        <a
-          href="#"
+        <Link
+          href="/compare/garmin-vs-applewatch/"
           className="w-full text-center bg-white border border-neutral-200 text-neutral-900 rounded-2xl py-[16px] text-[15px] font-semibold active:scale-[0.98] hover:border-neutral-900 hover:bg-neutral-50 transition"
         >
           GarminとApple Watchの詳しい比較を読む
-        </a>
+        </Link>
         <button
           onClick={onReset}
           className="w-full text-neutral-500 py-3 text-[14px] hover:text-neutral-900 transition"

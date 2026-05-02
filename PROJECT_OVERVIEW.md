@@ -49,7 +49,7 @@
 | 静的書き出し | ✅ `output: "export"` |
 | Netlifyデプロイ | ✅ 運用中 |
 | 商品画像 | ⏳ `public/reviews/` に手動配置待ち |
-| 比較記事ページ | ⏳ 未着手（"GarminとApple Watchの詳しい比較" は仮 `#`） |
+| 比較記事ページ | ✅ `/compare/garmin-vs-applewatch/` 完成 |
 | アフィリエイトリンク | ⏳ 未実装 |
 
 ## 非ゴール（やらないこと）
