@@ -325,6 +325,19 @@ function Step1ResultScreen({ type, onNext, onReset }) {
         {r.lead}
       </p>
 
+      <div className="mt-6 bg-white border border-neutral-200 rounded-2xl p-5">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <ResultStep label="STEP1" title="方向性" active />
+          <span className="text-neutral-300 text-[18px]" aria-hidden="true">
+            →
+          </span>
+          <ResultStep label="STEP2" title="具体モデル" />
+        </div>
+        <p className="mt-4 text-[13px] text-neutral-600 leading-[1.7]">
+          STEP1では大きな方向性を確認しました。次の5問で、あなたに合う具体モデルを絞ります。
+        </p>
+      </div>
+
       {r.fits && (
         <div className="mt-7 bg-neutral-50 border border-neutral-200/70 rounded-2xl p-5">
           <div className="text-[13px] font-semibold text-neutral-900 mb-3">
@@ -385,6 +398,19 @@ function FinalResultScreen({ model, step1Type, onReset }) {
         {model.catch}
       </p>
 
+      <div className="mt-5 bg-white border border-neutral-200 rounded-2xl p-5">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <ResultStep label="STEP1" title="方向性" />
+          <span className="text-neutral-300 text-[18px]" aria-hidden="true">
+            →
+          </span>
+          <ResultStep label="STEP2" title="具体モデル" active />
+        </div>
+        <p className="mt-4 text-[13px] text-neutral-600 leading-[1.7]">
+          STEP1の方向性を土台に、STEP2の回答からこのモデルを選びました。
+        </p>
+      </div>
+
       <div className="mt-7 bg-neutral-50 border border-neutral-200/70 rounded-2xl p-5">
         <div className="text-[13px] font-semibold text-neutral-900 mb-3">
           このモデルが向いている理由
@@ -444,6 +470,21 @@ function FinalResultScreen({ model, step1Type, onReset }) {
             : "中間タイプ"}{" "}
         ／ STEP 2：{model.name}
       </div>
+    </div>
+  );
+}
+
+function ResultStep({ label, title, active = false }) {
+  return (
+    <div
+      className={`rounded-xl px-3 py-3 text-center ${
+        active ? "bg-neutral-900 text-white" : "bg-neutral-50 text-neutral-500"
+      }`}
+    >
+      <div className="text-[10px] font-semibold tracking-[0.16em] uppercase">
+        {label}
+      </div>
+      <div className="mt-1 text-[13px] font-semibold">{title}</div>
     </div>
   );
 }
