@@ -54,9 +54,59 @@ const appleFits = [
   "細かい分析より、毎日つけたくなることを重視したい",
 ];
 
+const faqs = [
+  {
+    question: "ランニング初心者が最初に買うならどっち？",
+    answer:
+      "ランニングを「これから本気でやりたい」ならGarmin、健康習慣として「ゆるく続けたい」ならApple Watchが合います。続ける動機の作り方が両者で違うので、自分のスタンスで決めると失敗しません。",
+  },
+  {
+    question: "Garmin と Apple Watch、価格はどれくらい違う？",
+    answer:
+      "Garminはエントリーの Forerunner 165 が約45,000円から、本格モデルの 265 が約65,000〜75,000円。Apple Watchは SE が約34,000円から、ランナー向けの Ultra は約130,000円超まで幅があります。同じ「本格レンジ」で見比べると価格差は意外と小さく、機能の方向性で選ぶのが実用的です。",
+  },
+  {
+    question: "iPhone を持っていなくても Garmin は使える？",
+    answer:
+      "使えます。Garmin は iPhone でも Android でも Garmin Connect アプリと連携できます。一方 Apple Watch は iPhone がないと初期設定もできません。Android ユーザーの選択肢は実質 Garmin / COROS の二択になります。",
+  },
+  {
+    question: "Apple Watch でフルマラソンを走れる？",
+    answer:
+      "Series モデルは約18時間、Ultra は約36時間のバッテリーです。Series で4時間台のフルマラソンは余裕がありますが、サブ3クラスの練習とレースを毎日装着で運用すると充電タイミングが気になります。Ultra なら不安は大きく減ります。",
+  },
+  {
+    question: "Garmin と Apple Watch、両方持ちはアリ？",
+    answer:
+      "アリです。Apple Watch を普段使いの主役にしつつ、ランのときだけ Garmin に切り替えるスタイルは、本格的に走るランナーに多く見られます。トータル投資は増えますが、それぞれの強みが活きるため快適に運用できます。",
+  },
+  {
+    question: "GPS精度は本当に違う？",
+    answer:
+      "マルチバンドGPS搭載モデル（Garmin 265 / 965、Apple Watch Ultra など）は街中のビル街や林間でも軌跡が安定します。シングルバンド機は1〜2%程度の距離誤差が出る場面があり、レース後のラップ分析の信頼度に差が出ます。",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.answer,
+    },
+  })),
+};
+
 export default function GarminVsAppleWatchPage() {
   return (
     <main className="min-h-screen w-full bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <article className="w-full max-w-[640px] mx-auto px-6 pt-6 pb-16">
         <Link
           href="/"
@@ -135,6 +185,29 @@ export default function GarminVsAppleWatchPage() {
               一方で、ランニングが生活の一部で、仕事中も外出中も同じ時計を使いたいならApple Watchが自然です。
               通知や決済まで含めて、毎日つける理由が多いのが強みです。
             </p>
+          </div>
+        </Section>
+
+        <Section title="よくある質問">
+          <div className="space-y-2">
+            {faqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group bg-neutral-50 border border-neutral-200/70 rounded-2xl"
+              >
+                <summary className="cursor-pointer list-none px-5 py-4 flex justify-between items-start gap-3">
+                  <span className="text-[15px] font-semibold text-neutral-900 leading-[1.5]">
+                    {faq.question}
+                  </span>
+                  <span className="text-neutral-400 text-[18px] leading-none mt-[2px] group-open:rotate-180 inline-block transition flex-shrink-0">
+                    ⌄
+                  </span>
+                </summary>
+                <p className="px-5 pb-4 -mt-1 text-[14px] text-neutral-700 leading-[1.85]">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
           </div>
         </Section>
 
