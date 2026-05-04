@@ -9,6 +9,7 @@ import {
   models,
   diagnoseStep1,
   diagnoseStep2,
+  getStep1Reason,
 } from "./data";
 
 export default function Diagnosis() {
@@ -96,6 +97,7 @@ export default function Diagnosis() {
         {phase === "step1Result" && (
           <Step1ResultScreen
             type={step1Type}
+            answers={step1Answers}
             onNext={() => setPhase("step2")}
             onReset={reset}
           />
@@ -309,8 +311,9 @@ function YesNoQuestionScreen({
 // ------------------------------------------------------
 // STEP1 結果
 // ------------------------------------------------------
-function Step1ResultScreen({ type, onNext, onReset }) {
+function Step1ResultScreen({ type, answers, onNext, onReset }) {
   const r = step1Results[type];
+  const reason = answers ? getStep1Reason(answers, type) : null;
   return (
     <div className="flex-1 flex flex-col animate-fadeSlide">
       <div className="text-[11px] font-semibold tracking-[0.22em] text-neutral-500 mb-4 uppercase">
@@ -324,6 +327,17 @@ function Step1ResultScreen({ type, onNext, onReset }) {
       <p className="mt-5 text-[15px] text-neutral-700 leading-[1.85] whitespace-pre-line">
         {r.lead}
       </p>
+
+      {reason && (
+        <div className="mt-5 bg-neutral-50 border-l-2 border-neutral-900 rounded-r-lg px-4 py-3">
+          <div className="text-[11px] font-semibold tracking-wider text-neutral-500 mb-1">
+            あなたの回答から
+          </div>
+          <p className="text-[13px] text-neutral-800 leading-[1.7]">
+            {reason}
+          </p>
+        </div>
+      )}
 
       <div className="mt-6 bg-white border border-neutral-200 rounded-2xl p-5">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">

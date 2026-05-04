@@ -82,6 +82,22 @@ export function diagnoseStep1(answerIndexes) {
   return diff > 0 ? "garmin" : "apple";
 }
 
+// 例外ロジックなど「なぜその診断になったか」を1行で説明する。
+// 該当するケースが無ければ null を返す。
+// 入力: STEP1の回答 index 配列 / diagnoseStep1 の出力
+// 出力: 説明文 string または null
+export function getStep1Reason(answerIndexes, type) {
+  // 例外ルール：Q1=A（記録を伸ばしたい）AND Q4=A（データかなり好き）→ Garmin強制
+  if (
+    type === "garmin" &&
+    answerIndexes[0] === 0 &&
+    answerIndexes[3] === 0
+  ) {
+    return "「記録を伸ばしたい」と「データかなり好き」を選んだあなたは、Garmin の強みが最も活きるタイプです。";
+  }
+  return null;
+}
+
 // STEP1の結果説明
 export const step1Results = {
   garmin: {
