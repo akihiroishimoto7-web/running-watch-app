@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { reviews, reviewSlugs } from "../../reviews";
 
+const SITE_URL = "https://runningwatchapps.netlify.app";
+
 export function generateStaticParams() {
   return reviewSlugs.map((slug) => ({ slug }));
 }
@@ -20,12 +22,58 @@ export function generateMetadata({ params }) {
   };
 }
 
+// レビューデータから schema.org Product の JSON-LD を組み立てる。
+// useCases の rating を平均して aggregateRating を生成。
+function buildProductJsonLd(review) {
+  const ratings = review.useCases.map((u) => u.rating);
+  const avg = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+  const ratingValue = Math.round(avg * 10) / 10;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: review.name,
+    brand: { "@type": "Brand", name: review.brand },
+    description: review.tagline,
+    image: `${SITE_URL}${review.image}`,
+    url: `${SITE_URL}/review/${review.slug}/`,
+    review: {
+      "@type": "Review",
+      author: {
+        "@type": "Organization",
+        name: "ランニングウォッチ診断",
+      },
+      name: `${review.name} レビュー`,
+      reviewBody: review.tagline,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+      ratingCount: ratings.length,
+    },
+  };
+}
+
 export default function ReviewPage({ params }) {
   const review = reviews[params.slug];
   if (!review) notFound();
 
+  const jsonLd = buildProductJsonLd(review);
+
   return (
     <main className="min-h-screen w-full bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="w-full max-w-[640px] mx-auto px-6 pt-6 pb-16">
         <Link
           href="/"
