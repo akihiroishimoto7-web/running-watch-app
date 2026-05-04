@@ -100,12 +100,38 @@ const faqJsonLd = {
   })),
 };
 
+const SITE_URL = "https://runningwatchapps.netlify.app";
+
+// パンくずの JSON-LD。トップ → 当ページの2階層。
+// 最後の要素は現在ページなので item URL は省略。
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "ランニングウォッチ診断",
+      item: `${SITE_URL}/`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Garmin と Apple Watch の違い",
+    },
+  ],
+};
+
 export default function GarminVsAppleWatchPage() {
   return (
     <main className="min-h-screen w-full bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <article className="w-full max-w-[640px] mx-auto px-6 pt-6 pb-16">
         <Link
