@@ -44,7 +44,10 @@ PowerShellでは `npm` が実行ポリシーで止まる場合があるため、
 npm.cmd install
 npm.cmd run dev
 npm.cmd run build
+npm.cmd test
 ```
+
+`npm.cmd test` は Node 標準の `node:test` で診断ロジックの単体テストを実行します（依存ゼロ）。
 
 ローカル確認URL:
 
@@ -78,6 +81,19 @@ http://localhost:3000/review/forerunner-265/
 
 - `HANDOFF_FOR_CLAUDE_DESIGN.md` を追加
 
+## Claude（Code）による継続改善
+
+`a0b9e2d` 以降は Claude Code が引き継ぎ、1目的1コミットで以下を実施しました。
+
+- レビュー記事に `Product` JSON-LD schema を追加（`useCases` の rating 平均から `aggregateRating` を生成）
+- 例外ロジック発火時（Q1=A & Q4=A → garmin強制）に「あなたの回答から」の1行説明を STEP1 結果画面に表示
+- 診断ロジックの単体テストを追加（`tests/diagnose.test.mjs` / Node 標準の `node:test`、依存ゼロ）
+  - `app/data.js` → `app/data.mjs` にリネーム（Node が ESM として直接 import するため）
+  - `package.json` に `npm test` スクリプトを追加
+- `/compare/garmin-vs-applewatch/` に FAQ セクション（6問）と `FAQPage` JSON-LD を追加
+
+すべてのコミットは Author: `Claude <claude@example.local>` で識別できます。
+
 ## 主要コミット
 
 ```text
@@ -88,17 +104,23 @@ f656021 Clarify diagnosis result flow
 8c07554 Mark question progress check complete
 7512078 Ignore local dev logs
 f063633 Add Claude Design handoff brief
+a0b9e2d Add Claude Code handoff guide
+7ebda9d Add JSON-LD Product schema to review pages
+dd38e2b Explain Garmin verdict when exception rule fires
+7670f22 Add unit tests for diagnosis logic
+25a9005 Add FAQ section to Garmin vs Apple Watch page
 ```
 
 ## 触ってよい主なファイル
 
 - `app/Diagnosis.jsx`
-- `app/data.js`
+- `app/data.mjs`（旧 `app/data.js`、ESM の Node テスト互換のためリネーム済み）
 - `app/reviews.js`
 - `app/review/[slug]/page.jsx`
 - `app/compare/garmin-vs-applewatch/page.jsx`
 - `app/globals.css`
 - `tailwind.config.js`
+- `tests/diagnose.test.mjs`
 - `IMPROVEMENT_PLAN.md`
 - `PROJECT_OVERVIEW.md`
 
@@ -154,7 +176,7 @@ public/reviews/apple-watch.jpg
 
 ### アフィリエイトリンク
 
-`app/data.js` の `models[*].links` に、将来的に以下を追加する想定です。
+`app/data.mjs` の `models[*].links` に、将来的に以下を追加する想定です。
 
 ```js
 links: {
@@ -185,10 +207,10 @@ target="_blank"
 
 素材なしで進めるなら、次はP1寄りですが以下が安全です。
 
-1. 中間タイプの説明を充実させる
-2. 例外ロジックに近いケースで「なぜGarmin向きか」を結果に1行出す
-3. レビュー記事にJSON-LD `Product` schemaを追加する
-4. 診断ロジックの単体テストを最小構成で追加する
+1. 中間タイプ（`step1Results.middle`）の結果説明を充実させる
+2. レビュー記事に `BreadcrumbList` JSON-LD を追加する（既存 `Product` schema の続編）
+3. トップページに `WebSite` JSON-LD を追加する（IMPROVEMENT_PLAN.md P1 SEO項目）
+4. 比較ページの FAQ 各回答からレビュー記事への内部リンクを追加する
 5. Next.js 14.2.5 の脆弱性警告について、アップデート方針を調査する
 
 外部素材があるなら、優先は以下です。
@@ -196,6 +218,13 @@ target="_blank"
 1. 商品画像5枚を配置
 2. アフィリエイトリンクを追加
 3. レビュー記事内のCTA配置を調整
+
+### すでに完了
+
+- ✅ 例外ロジック発火時に「なぜGarmin向きか」を結果に1行出す（`dd38e2b`）
+- ✅ レビュー記事に JSON-LD `Product` schema を追加（`7ebda9d`）
+- ✅ 診断ロジックの単体テスト最小構成（`7670f22` / `npm.cmd test` で実行可）
+- ✅ 比較ページに FAQ + `FAQPage` JSON-LD を追加（`25a9005`）
 
 ## 注意点
 
@@ -219,7 +248,7 @@ Next.js App Router / JavaScript / Tailwind CSS / 静的書き出し output: "exp
 
 診断ロジック、設問数、モデルキー、review slug、next.config.mjs は勝手に変更しないでください。
 
-作業前に git status を確認し、変更後は npm.cmd run build を通してください。
+作業前に git status を確認し、変更後は npm.cmd run build と npm.cmd test を通してください。
 
 まずは IMPROVEMENT_PLAN.md のP0/P1から、素材や外部アカウントが不要な改善を1つ選んで、1目的1コミットで進めてください。
 ```
