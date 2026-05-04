@@ -22,6 +22,28 @@ export function generateMetadata({ params }) {
   };
 }
 
+// パンくずの JSON-LD。トップ → 個別レビュー の2階層。
+// 最後の要素は現在ページなので item URL は省略（Google ガイドライン許容）。
+function buildBreadcrumbJsonLd(review) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "ランニングウォッチ診断",
+        item: `${SITE_URL}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `${review.name} レビュー`,
+      },
+    ],
+  };
+}
+
 // レビューデータから schema.org Product の JSON-LD を組み立てる。
 // useCases の rating を平均して aggregateRating を生成。
 function buildProductJsonLd(review) {
@@ -66,13 +88,18 @@ export default function ReviewPage({ params }) {
   const review = reviews[params.slug];
   if (!review) notFound();
 
-  const jsonLd = buildProductJsonLd(review);
+  const productJsonLd = buildProductJsonLd(review);
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(review);
 
   return (
     <main className="min-h-screen w-full bg-white">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <div className="w-full max-w-[640px] mx-auto px-6 pt-6 pb-16">
         <Link
