@@ -371,6 +371,25 @@ function Step1ResultScreen({ type, answers, onNext, onReset }) {
         </div>
       )}
 
+      {r.tieBreakers && (
+        <div className="mt-7 bg-neutral-50 border border-neutral-200/70 rounded-2xl p-5">
+          <div className="text-[13px] font-semibold text-neutral-900 mb-3">
+            迷ったときの判断軸
+          </div>
+          <ul className="space-y-2.5">
+            {r.tieBreakers.map((t, i) => (
+              <li
+                key={i}
+                className="flex gap-3 text-[14px] leading-[1.6] text-neutral-700"
+              >
+                <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-neutral-900 flex-shrink-0" />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="mt-9 flex flex-col gap-2.5">
         <button
           onClick={onNext}
