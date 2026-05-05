@@ -68,7 +68,7 @@ const faqs = [
   {
     question: "iPhone を持っていなくても Garmin は使える？",
     answer:
-      "使えます。Garmin は iPhone でも Android でも Garmin Connect アプリと連携できます。一方 Apple Watch は iPhone がないと初期設定もできません。Android ユーザーの選択肢は実質 Garmin / COROS の二択になります。",
+      "使えます。Garmin は iPhone でも Android でも Garmin Connect アプリと連携できます。一方 Apple Watch は iPhone がないと初期設定もできません。Android ユーザーの選択肢は実質 Garmin か COROS PACE 4 の二択になります。",
   },
   {
     question: "Apple Watch でフルマラソンを走れる？",
@@ -83,7 +83,7 @@ const faqs = [
   {
     question: "GPS精度は本当に違う？",
     answer:
-      "マルチバンドGPS搭載モデル（Garmin 265 / 965、Apple Watch Ultra など）は街中のビル街や林間でも軌跡が安定します。シングルバンド機は1〜2%程度の距離誤差が出る場面があり、レース後のラップ分析の信頼度に差が出ます。",
+      "マルチバンドGPS搭載モデル（Garmin 265 / 965、COROS PACE 4、Apple Watch Ultra など）は街中のビル街や林間でも軌跡が安定します。シングルバンド機は1〜2%程度の距離誤差が出る場面があり、レース後のラップ分析の信頼度に差が出ます。",
   },
 ];
 
