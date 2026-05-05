@@ -3,7 +3,7 @@ import "./globals.css";
 export const metadata = {
   title: "ランニングウォッチ診断 | Garmin と Apple Watch、あなたに合うのは？",
   description:
-    "Garmin Apple Watch 比較診断。初心者〜サブ4ランナー向けに、最適なランニングウォッチを2ステップで診断します。Forerunner 165 / 265 / 965、COROS PACE 3、Apple Watchから最適モデルを提案。",
+    "Garmin Apple Watch 比較診断。初心者〜サブ4ランナー向けに、最適なランニングウォッチを2ステップで診断します。Forerunner 165 / 265 / 965、COROS PACE 4、Apple Watchから最適モデルを提案。",
   keywords: [
     "ランニングウォッチ",
     "Garmin",
@@ -13,7 +13,7 @@ export const metadata = {
     "Forerunner 165",
     "Forerunner 265",
     "Forerunner 965",
-    "COROS PACE 3",
+    "COROS PACE 4",
     "サブ4",
   ],
   openGraph: {

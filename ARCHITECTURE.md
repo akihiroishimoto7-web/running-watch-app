@@ -96,7 +96,7 @@ diagnoseStep2(answers: ("YES"|"NO")[], step1Type): modelKey
 | `/review/forerunner-165/` | SSG |
 | `/review/forerunner-265/` | SSG |
 | `/review/forerunner-965/` | SSG |
-| `/review/coros-pace-3/` | SSG |
+| `/review/coros-pace-4/` | SSG |
 | `/review/apple-watch/` | SSG |
 | `/compare/garmin-vs-applewatch/` | 静的（Garmin / Apple Watch 比較） |
 | `/sitemap.xml` | SEO（App Router metadata route） |

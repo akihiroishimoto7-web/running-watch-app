@@ -23,7 +23,7 @@
 - `next.config.mjs`（`output: "export"` を外すとデプロイが壊れる）
 - `app/layout.jsx` の metadata 構造
 - 診断ロジック関数の **シグネチャ**（`diagnoseStep1` / `diagnoseStep2`）
-- モデルキー名（`garmin165` / `garmin265` / `garmin965` / `corosPace3` / `appleWatch`）
+- モデルキー名（`garmin165` / `garmin265` / `garmin965` / `corosPace4` / `appleWatch`）
 - レビュー slug（URL に直結）
 
 ### やってはいけない変更

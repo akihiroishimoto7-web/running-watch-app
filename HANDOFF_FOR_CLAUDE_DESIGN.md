@@ -69,7 +69,7 @@
    - 5問、YES / NO
 
 5. STEP2 結果画面
-   - Forerunner 165 / 265 / 965 / COROS PACE 3 / Apple Watch のいずれかを提案
+   - Forerunner 165 / 265 / 965 / COROS PACE 4 / Apple Watch のいずれかを提案
 
 6. レビュー記事
    - `/review/{slug}/`
@@ -152,13 +152,13 @@
   - `garmin165`
   - `garmin265`
   - `garmin965`
-  - `corosPace3`
+  - `corosPace4`
   - `appleWatch`
 - レビュー slug
   - `forerunner-165`
   - `forerunner-265`
   - `forerunner-965`
-  - `coros-pace-3`
+  - `coros-pace-4`
   - `apple-watch`
 - 静的書き出し方針
   - Next.js App Router

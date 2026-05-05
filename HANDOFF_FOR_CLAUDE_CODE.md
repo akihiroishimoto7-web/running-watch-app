@@ -143,13 +143,13 @@ dd38e2b Explain Garmin verdict when exception rule fires
   - `garmin165`
   - `garmin265`
   - `garmin965`
-  - `corosPace3`
+  - `corosPace4`
   - `appleWatch`
 - レビューslug
   - `forerunner-165`
   - `forerunner-265`
   - `forerunner-965`
-  - `coros-pace-3`
+  - `coros-pace-4`
   - `apple-watch`
 - `output: "export"`
 - Pages Routerへの移行
@@ -168,7 +168,7 @@ dd38e2b Explain Garmin verdict when exception rule fires
 public/reviews/forerunner-165.jpg
 public/reviews/forerunner-265.jpg
 public/reviews/forerunner-965.jpg
-public/reviews/coros-pace-3.jpg
+public/reviews/coros-pace-4.jpg
 public/reviews/apple-watch.jpg
 ```
 

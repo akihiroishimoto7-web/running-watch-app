@@ -80,7 +80,7 @@ diagnoseStep2(answers, step1Type) → modelKey
 2. **Q1=YES かつ Q5=YES かつ Q4=NO** → `garmin165`
 3. **Q1=NO かつ Q3=YES かつ Q5=NO** → `garmin965`
 4. **Q2=YES かつ Q3=YES** → `garmin265`
-5. **Q1=NO かつ Q5=YES かつ Q4=NO** → `corosPace3`
+5. **Q1=NO かつ Q5=YES かつ Q4=NO** → `corosPace4`
 6. それ以外 → スコア最大のモデル
 
 ## 診断タイプ
@@ -100,7 +100,7 @@ diagnoseStep2(answers, step1Type) → modelKey
 | Garmin エントリー | Forerunner 165 | 〜5万 | 初心者、初めての本格機 |
 | Garmin 本格 | Forerunner 265 | 6.5〜7.5万 | サブ4本気層 |
 | Garmin 最上位 | Forerunner 965 | 9〜10万 | サブ3 / ウルトラ / トレイル |
-| コスパ | COROS PACE 3 | 約3.85万 | コスパ重視 / 軽量好み |
+| コスパ | COROS PACE 4 | 約3.6万 | コスパ重視 / 軽量好み / AMOLED + 音楽保存 |
 | Apple | Apple Watch | 3.4〜13万 | 普段使い重視 |
 
 ### 各モデルの特徴と理由（要約）
@@ -110,7 +110,7 @@ diagnoseStep2(answers, step1Type) → modelKey
 | Forerunner 165 | AMOLED + 39g + 5万円 | 初心者が後悔しない最小構成 |
 | Forerunner 265 | マルチバンドGPS + Training Readiness | データを見て走力を伸ばす中級向け |
 | Forerunner 965 | カラー地図 + 31時間GPS | ウルトラ・トレイル・知らない場所で走る人 |
-| COROS PACE 3 | 30g + デュアル周波数 + 38時間 | Garminより安く軽量、機能は本格 |
+| COROS PACE 4 | AMOLED + デュアル周波数 + 41時間 + 音楽保存 | Garminより安く軽量、機能は本格 |
 | Apple Watch | iPhone連携 + デザイン + ヘルスケア | ランより生活全体を重視する人 |
 
 ## エラー / 異常系
@@ -125,5 +125,5 @@ diagnoseStep2(answers, step1Type) → modelKey
 
 - 設問数（STEP1=5問 / STEP2=5問）
 - ファーストビューのコピー「GarminかApple Watchか。最適な1本を、1分で。」
-- モデルキー名（`garmin165` / `garmin265` / `garmin965` / `corosPace3` / `appleWatch`）
+- モデルキー名（`garmin165` / `garmin265` / `garmin965` / `corosPace4` / `appleWatch`）
 - レビュー slug（URL に直結）

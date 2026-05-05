@@ -195,19 +195,19 @@ export const models = {
       review: "/review/forerunner-965/",
     },
   },
-  corosPace3: {
-    id: "corosPace3",
-    name: "COROS PACE 3",
+  corosPace4: {
+    id: "corosPace4",
+    name: "COROS PACE 4",
     brand: "COROS",
-    catch: "軽くて、安くて、長く走れる。コスパの正解。",
+    catch: "AMOLED と音楽保存を手に入れた、コスパ最強の正常進化版。",
     reasons: [
-      "わずか39gの超軽量で腕への負担が少ない",
-      "5万円以下ながらデュアル周波数GPS搭載",
-      "バッテリー最大24日と圧倒的な持ち",
+      "AMOLEDタッチスクリーンで視認性が大きく向上",
+      "デュアル周波数GPSで街中・林間でも軌跡が安定",
+      "GPS最大41時間・本体音楽保存対応で約36,300円",
     ],
     notFor: "通知やアプリ連携をフル活用したい人",
     links: {
-      review: "/review/coros-pace-3/",
+      review: "/review/coros-pace-4/",
     },
   },
   appleWatch: {
@@ -237,14 +237,14 @@ export function diagnoseStep2(answers, step1Type) {
     garmin165: 0,
     garmin265: 0,
     garmin965: 0,
-    corosPace3: 0,
+    corosPace4: 0,
     appleWatch: 0,
   };
 
   // Q1：初めてのランニングウォッチか
   if (q1 === "YES") {
     score.garmin165 += 2;
-    score.corosPace3 += 1;
+    score.corosPace4 += 1;
     score.appleWatch += 1;
   } else {
     score.garmin265 += 1;
@@ -255,7 +255,7 @@ export function diagnoseStep2(answers, step1Type) {
   if (q2 === "YES") {
     score.garmin265 += 2;
     score.garmin965 += 2;
-    score.corosPace3 += 1;
+    score.corosPace4 += 1;
   } else {
     score.garmin165 += 1;
     score.appleWatch += 2;
@@ -265,7 +265,7 @@ export function diagnoseStep2(answers, step1Type) {
   if (q3 === "YES") {
     score.garmin265 += 2;
     score.garmin965 += 3;
-    score.corosPace3 += 1;
+    score.corosPace4 += 1;
   } else {
     score.garmin165 += 1;
     score.appleWatch += 2;
@@ -278,13 +278,13 @@ export function diagnoseStep2(answers, step1Type) {
   } else {
     score.garmin265 += 1;
     score.garmin965 += 1;
-    score.corosPace3 += 1;
+    score.corosPace4 += 1;
   }
 
   // Q5：価格抑えたい
   if (q5 === "YES") {
     score.garmin165 += 2;
-    score.corosPace3 += 2;
+    score.corosPace4 += 2;
   } else {
     score.garmin965 += 2;
     score.garmin265 += 1;
@@ -296,7 +296,7 @@ export function diagnoseStep2(answers, step1Type) {
     score.garmin165 += 1;
     score.garmin265 += 1;
     score.garmin965 += 1;
-    score.corosPace3 += 1;
+    score.corosPace4 += 1;
   } else if (step1Type === "apple") {
     score.appleWatch += 2;
   }
@@ -310,8 +310,8 @@ export function diagnoseStep2(answers, step1Type) {
   if (q1 === "NO" && q3 === "YES" && q5 === "NO") return "garmin965";
   // 4. サブ4×分析 → Garmin 265
   if (q2 === "YES" && q3 === "YES") return "garmin265";
-  // 5. 軽さ×コスパ（価格抑えたい×経験者）→ COROS PACE 3
-  if (q1 === "NO" && q5 === "YES" && q4 === "NO") return "corosPace3";
+  // 5. 軽さ×コスパ（価格抑えたい×経験者）→ COROS PACE 4
+  if (q1 === "NO" && q5 === "YES" && q4 === "NO") return "corosPace4";
 
   // それ以外はスコア最大値で決定
   let bestId = "garmin165";

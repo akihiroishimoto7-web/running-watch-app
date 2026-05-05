@@ -106,10 +106,10 @@ test("diagnoseStep2 ルール4: Q2=YES & Q3=YES (Q1=YES で前ルール回避) �
   );
 });
 
-test("diagnoseStep2 ルール5: Q1=NO & Q5=YES & Q4=NO (Q3=NO で前ルール回避) → corosPace3", () => {
+test("diagnoseStep2 ルール5: Q1=NO & Q5=YES & Q4=NO (Q3=NO で前ルール回避) → corosPace4", () => {
   assert.equal(
     diagnoseStep2(["NO", "NO", "NO", "NO", "YES"], "garmin"),
-    "corosPace3",
+    "corosPace4",
   );
 });
 
@@ -121,7 +121,7 @@ const VALID_MODELS = new Set([
   "garmin165",
   "garmin265",
   "garmin965",
-  "corosPace3",
+  "corosPace4",
   "appleWatch",
 ]);
 
