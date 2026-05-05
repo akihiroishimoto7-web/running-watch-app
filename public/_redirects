@@ -1,0 +1,4 @@
+# Netlify redirects
+# 旧 COROS PACE 3 のレビューURLは PACE 4 に統合されました。
+/review/coros-pace-3/   /review/coros-pace-4/   301
+/review/coros-pace-3    /review/coros-pace-4/   301
