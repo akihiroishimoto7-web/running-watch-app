@@ -110,7 +110,7 @@ diagnoseStep2(answers, step1Type) → modelKey
 | Forerunner 165 | AMOLED + 39g + 5万円 | 初心者が後悔しない最小構成 |
 | Forerunner 265 | マルチバンドGPS + Training Readiness | データを見て走力を伸ばす中級向け |
 | Forerunner 965 | カラー地図 + 31時間GPS | ウルトラ・トレイル・知らない場所で走る人 |
-| COROS PACE 4 | AMOLED + デュアル周波数 + 41時間 + 音楽保存 | Garminより安く軽量、機能は本格 |
+| COROS PACE 4 | AMOLED + デュアル周波数対応 + GPS最大41時間 + 音楽保存 | Garminより安く軽量、機能は本格 |
 | Apple Watch | iPhone連携 + デザイン + ヘルスケア | ランより生活全体を重視する人 |
 
 ## エラー / 異常系

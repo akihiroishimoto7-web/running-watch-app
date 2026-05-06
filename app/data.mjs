@@ -201,7 +201,7 @@ export const models = {
     id: "corosPace4",
     name: "COROS PACE 4",
     brand: "COROS",
-    catch: "AMOLED と音楽保存を手に入れた、コスパ最強の正常進化版。",
+    catch: "AMOLED と長時間GPSを備えた、軽量コスパ機。",
     reasons: [
       "AMOLEDタッチスクリーンで視認性が大きく向上",
       "デュアル周波数GPSで街中・林間でも軌跡が安定",
