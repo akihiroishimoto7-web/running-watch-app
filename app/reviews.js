@@ -104,7 +104,7 @@ export const reviews = {
     modelKey: "garmin265",
     name: "Garmin Forerunner 265",
     brand: "Garmin",
-    image: "/reviews/forerunner-265.jpg",
+    image: "/reviews/forerunner-265.png",
     tagline: "サブ4を本気で狙うランナーの定番。",
     hero:
       "2023年3月発売。Forerunner シリーズの中核モデルとして、本格的なトレーニング機能を AMOLED ディスプレイと組み合わせた一本。マルチバンドGPSの精度と Training Readiness をはじめとする上級指標により、サブ4・自己ベスト更新を狙うランナーの「ちょうどよい上位機」として支持を集めている。",
@@ -206,7 +206,7 @@ export const reviews = {
     modelKey: "garmin965",
     name: "Garmin Forerunner 965",
     brand: "Garmin",
-    image: "/reviews/forerunner-965.jpg",
+    image: "/reviews/forerunner-965.png",
     tagline: "ガチ勢が辿り着く、Garmin の完成形。",
     hero:
       "2023年3月発売の最上位ランニングウォッチ。Forerunner シリーズのフル機能版で、マルチバンドGPS、カラー地図、最大31時間のGPSバッテリー、Training Readinessを含むあらゆるトレーニング指標を搭載。サブ3を狙う上級ランナーから、ウルトラ・トレイルランナーまで応える1本。",
@@ -305,7 +305,7 @@ export const reviews = {
     modelKey: "corosPace4",
     name: "COROS PACE 4",
     brand: "COROS",
-    image: "/reviews/coros-pace-4.jpg",
+    image: "/reviews/coros-pace-4.png",
     tagline:
       "AMOLED と音楽保存を手に入れた、コスパ最強の正常進化版。",
     hero:
