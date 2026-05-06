@@ -59,21 +59,35 @@ const faqs = [
     question: "ランニング初心者が最初に買うならどっち？",
     answer:
       "ランニングを「これから本気でやりたい」ならGarmin、健康習慣として「ゆるく続けたい」ならApple Watchが合います。続ける動機の作り方が両者で違うので、自分のスタンスで決めると失敗しません。",
+    links: [
+      { href: "/review/forerunner-165/", label: "Forerunner 165" },
+      { href: "/review/apple-watch/", label: "Apple Watch" },
+    ],
   },
   {
     question: "Garmin と Apple Watch、価格はどれくらい違う？",
     answer:
       "Garminはエントリーの Forerunner 165 が約45,000円から、本格モデルの 265 が約65,000〜75,000円。Apple Watchは SE が約34,000円から、ランナー向けの Ultra は約130,000円超まで幅があります。同じ「本格レンジ」で見比べると価格差は意外と小さく、機能の方向性で選ぶのが実用的です。",
+    links: [
+      { href: "/review/forerunner-165/", label: "Forerunner 165" },
+      { href: "/review/forerunner-265/", label: "Forerunner 265" },
+      { href: "/review/apple-watch/", label: "Apple Watch" },
+    ],
   },
   {
     question: "iPhone を持っていなくても Garmin は使える？",
     answer:
       "使えます。Garmin は iPhone でも Android でも Garmin Connect アプリと連携できます。一方 Apple Watch は iPhone がないと初期設定もできません。Android ユーザーの選択肢は実質 Garmin か COROS PACE 4 の二択になります。",
+    links: [
+      { href: "/review/coros-pace-4/", label: "COROS PACE 4" },
+      { href: "/review/forerunner-165/", label: "Forerunner 165" },
+    ],
   },
   {
     question: "Apple Watch でフルマラソンを走れる？",
     answer:
       "Series モデルは約18時間、Ultra は約36時間のバッテリーです。Series で4時間台のフルマラソンは余裕がありますが、サブ3クラスの練習とレースを毎日装着で運用すると充電タイミングが気になります。Ultra なら不安は大きく減ります。",
+    links: [{ href: "/review/apple-watch/", label: "Apple Watch" }],
   },
   {
     question: "Garmin と Apple Watch、両方持ちはアリ？",
@@ -84,6 +98,10 @@ const faqs = [
     question: "GPS精度は本当に違う？",
     answer:
       "マルチバンドGPS搭載モデル（Garmin 265 / 965、COROS PACE 4、Apple Watch Ultra など）は街中のビル街や林間でも軌跡が安定します。シングルバンド機は1〜2%程度の距離誤差が出る場面があり、レース後のラップ分析の信頼度に差が出ます。",
+    links: [
+      { href: "/review/forerunner-265/", label: "Forerunner 265" },
+      { href: "/review/coros-pace-4/", label: "COROS PACE 4" },
+    ],
   },
 ];
 
@@ -232,6 +250,22 @@ export default function GarminVsAppleWatchPage() {
                 <p className="px-5 pb-4 -mt-1 text-[14px] text-neutral-700 leading-[1.85]">
                   {faq.answer}
                 </p>
+                {faq.links && (
+                  <div className="px-5 pb-4 -mt-1 flex flex-wrap gap-x-3 gap-y-1.5 items-center">
+                    <span className="text-[11px] font-semibold tracking-wider text-neutral-500 uppercase">
+                      関連レビュー
+                    </span>
+                    {faq.links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-[13px] font-medium text-neutral-900 hover:text-neutral-600 transition underline underline-offset-2 decoration-neutral-300 hover:decoration-neutral-900"
+                      >
+                        {link.label} →
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </details>
             ))}
           </div>
