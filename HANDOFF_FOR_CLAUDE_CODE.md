@@ -71,6 +71,7 @@ http://localhost:3000/review/forerunner-265/
 
 - `/compare/garmin-vs-applewatch/` を追加
 - 診断結果画面の比較リンクを仮 `#` から実ページへ変更
+- `public/reviews/` に商品画像5枚を配置
 - `app/sitemap.js` を追加
 - `app/robots.js` を追加
 - `app/icon.svg` を追加
@@ -159,22 +160,6 @@ dd38e2b Explain Garmin verdict when exception rule fires
 
 ## 残っているP0
 
-### 商品画像
-
-`public/reviews/{slug}.jpg` に5枚を配置する必要があります。
-
-必要なファイル名:
-
-```text
-public/reviews/forerunner-165.jpg
-public/reviews/forerunner-265.jpg
-public/reviews/forerunner-965.jpg
-public/reviews/coros-pace-4.jpg
-public/reviews/apple-watch.jpg
-```
-
-画像素材がない場合は、ユーザーに確認してください。勝手に公式画像をダウンロードして同梱しないでください。
-
 ### アフィリエイトリンク
 
 `app/data.mjs` の `models[*].links` に、将来的に以下を追加する想定です。
@@ -216,9 +201,8 @@ target="_blank"
 
 外部素材があるなら、優先は以下です。
 
-1. 商品画像5枚を配置
-2. アフィリエイトリンクを追加
-3. レビュー記事内のCTA配置を調整
+1. アフィリエイトリンクを追加
+2. レビュー記事内のCTA配置を調整
 
 ### すでに完了
 
@@ -226,6 +210,7 @@ target="_blank"
 - ✅ レビュー記事に JSON-LD `Product` schema を追加（`7ebda9d`）
 - ✅ 診断ロジックの単体テスト最小構成（`7670f22` / `npm.cmd test` で実行可）
 - ✅ 比較ページに FAQ + `FAQPage` JSON-LD を追加（`25a9005`）
+- ✅ 商品画像5枚を配置（`4d08a08`）
 
 ## 注意点
 

@@ -32,7 +32,7 @@
 │       └── [slug]/
 │           └── page.jsx        # レビュー記事（SSG, server component）
 ├── public/
-│   └── reviews/                # 商品画像（{slug}.jpg を配置）
+│   └── reviews/                # 商品画像（reviews.js の image パスに合わせて配置）
 ├── out/                        # `npm run build` 出力（Netlifyにアップ）
 ├── next.config.mjs
 ├── tailwind.config.js
