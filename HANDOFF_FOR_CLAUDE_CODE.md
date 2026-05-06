@@ -226,7 +226,7 @@ Claude Code にそのまま貼る場合は、以下を使ってください。
 このプロジェクトを引き継いで改善してください。
 
 作業フォルダ:
-C:\Users\akihi\Desktop\Codex,ランニングウォッチアプリ
+C:\Users\akihi\Desktop\ランニングウォッチアプリ
 
 まず HANDOFF_FOR_CLAUDE_CODE.md、PROJECT_OVERVIEW.md、WATCH_APP_SPEC.md、INSTRUCTIONS_FOR_AI.md、IMPROVEMENT_PLAN.md を読んでください。
 

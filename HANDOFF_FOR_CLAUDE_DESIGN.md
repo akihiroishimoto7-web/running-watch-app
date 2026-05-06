@@ -28,7 +28,7 @@
 
 作業フォルダ:
 
-- `C:\Users\akihi\Desktop\Codex,ランニングウォッチアプリ`
+- `C:\Users\akihi\Desktop\ランニングウォッチアプリ`
 
 ## ターゲットユーザー
 
