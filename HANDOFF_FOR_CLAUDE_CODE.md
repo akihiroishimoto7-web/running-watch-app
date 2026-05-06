@@ -193,11 +193,10 @@ target="_blank"
 
 素材なしで進めるなら、次はP1寄りですが以下が安全です。
 
-1. 中間タイプ（`step1Results.middle`）の結果説明を充実させる
-2. レビュー記事に `BreadcrumbList` JSON-LD を追加する（既存 `Product` schema の続編）
-3. トップページに `WebSite` JSON-LD を追加する（IMPROVEMENT_PLAN.md P1 SEO項目）
-4. 比較ページの FAQ 各回答からレビュー記事への内部リンクを追加する
-5. Next.js 14.2.5 の脆弱性警告について、アップデート方針を調査する
+1. レビュー記事に `BreadcrumbList` JSON-LD を追加する（既存 `Product` schema の続編）
+2. トップページに `WebSite` JSON-LD を追加する（IMPROVEMENT_PLAN.md P1 SEO項目）
+3. 比較ページの FAQ 各回答からレビュー記事への内部リンクを追加する
+4. Next.js 14.2.5 の脆弱性警告について、アップデート方針を調査する
 
 外部素材があるなら、優先は以下です。
 
@@ -211,6 +210,7 @@ target="_blank"
 - ✅ 診断ロジックの単体テスト最小構成（`7670f22` / `npm.cmd test` で実行可）
 - ✅ 比較ページに FAQ + `FAQPage` JSON-LD を追加（`25a9005`）
 - ✅ 商品画像5枚を配置（`4d08a08`）
+- ✅ 中間タイプの結果説明を充実（`372017c`）
 
 ## 注意点
 
