@@ -93,6 +93,10 @@ export const reviews = {
       "すでにフルマラソン3時間半を切っているような上級者・地図機能やマルチバンドGPSが必須の人・トライアスロン対応が欲しい人",
     conclusion:
       "「Garmin が気になっているけど、いきなり高いのは…」という人にこそ刺さる1本。価格・機能・デザインのバランスが極めて良く、最初の本格ランニングウォッチとして買って後悔しにくい。3年は使える完成度の高さがある。",
+    relatedModels: [
+      { slug: "forerunner-265", reason: "次のステップに" },
+      { slug: "coros-pace-4", reason: "同価格帯のコスパ機" },
+    ],
   },
 
   "forerunner-265": {
@@ -191,6 +195,10 @@ export const reviews = {
       "始めたばかりの人 (オーバースペック)・地図ナビが必須の人 (965へ)・予算重視の人 (165や PACE 4 を)",
     conclusion:
       "165 と 965 の中間に位置する「現実解」。マルチバンドGPSと AMOLEDの組み合わせで、走力向上を真剣に目指す人にとって最も投資対効果が高い。日々のラン → ハーフ → フルの全シーンで信頼できる、定番中の定番。",
+    relatedModels: [
+      { slug: "forerunner-965", reason: "上位の最強モデル" },
+      { slug: "coros-pace-4", reason: "同等機能を低価格で" },
+    ],
   },
 
   "forerunner-965": {
@@ -286,6 +294,10 @@ export const reviews = {
       "街中の決まったコースしか走らない人 (265で十分)・予算10万円が厳しい人",
     conclusion:
       "Garmin が技術と思想を全部詰め込んだ「最終形」。長く使い込めば使い込むほど価値を実感する、ランナーの相棒として最上位の選択肢。",
+    relatedModels: [
+      { slug: "forerunner-265", reason: "もう少し価格を抑えるなら" },
+      { slug: "coros-pace-4", reason: "軽量・コスパに振るなら" },
+    ],
   },
 
   "coros-pace-4": {
@@ -396,6 +408,10 @@ export const reviews = {
       "国内コミュニティの大きさ・サポートを重視する人 / 通知やアプリ連携を本格的に使う人 / 発売直後の在庫リスクを避けたい人",
     conclusion:
       "PACE 3 で唯一の弱点だった AMOLED 非対応と音楽保存非対応がそろって解消され、GPS バッテリーまで延長された「正常進化版」。価格はむしろ据え置き〜やや下がっており、4万円以下で AMOLED+デュアル周波数+本体音楽保存を満たすモデルは現時点で他に存在しない。Garmin Forerunner 165 と真剣に比較する価値が一段と高くなった一本。",
+    relatedModels: [
+      { slug: "forerunner-165", reason: "Garmin の同価格帯" },
+      { slug: "forerunner-265", reason: "1ランク上の本格機" },
+    ],
   },
 
   "apple-watch": {
@@ -496,6 +512,10 @@ export const reviews = {
       "本気でサブ4以上を狙うランナー (Garmin / COROS が現実解)・Android ユーザー (連携の旨味が消える)・バッテリー持ちを最優先する人",
     conclusion:
       "「ランニングウォッチ」というカテゴリで見ると一段見劣りするが、「生活を支える1本」として見ると右に出るものがない。ランも生活も大事なら、まず Apple Watch から始めて、本格化したタイミングで Garmin を加える「二刀流」も現実的な選択。",
+    relatedModels: [
+      { slug: "forerunner-265", reason: "本格ラン用に追加するなら" },
+      { slug: "coros-pace-4", reason: "Android ユーザーの選択肢" },
+    ],
   },
 };
 

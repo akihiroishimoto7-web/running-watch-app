@@ -299,6 +299,42 @@ export default function ReviewPage({ params }) {
           </p>
         </Section>
 
+        {/* 次に検討するモデル（curated） */}
+        {review.relatedModels && review.relatedModels.length > 0 && (
+          <Section title="次に検討するモデル">
+            <div className="space-y-2.5">
+              {review.relatedModels.map((rel) => {
+                const target = reviews[rel.slug];
+                if (!target) return null;
+                return (
+                  <Link
+                    key={rel.slug}
+                    href={`/review/${rel.slug}/`}
+                    className="block bg-white border border-neutral-200/70 rounded-2xl px-5 py-4 hover:border-neutral-900 hover:bg-neutral-50 transition"
+                  >
+                    <div className="text-[11px] font-semibold tracking-wider text-neutral-500 uppercase">
+                      {rel.reason}
+                    </div>
+                    <div className="mt-1 flex justify-between items-center gap-3">
+                      <div>
+                        <div className="text-[12px] text-neutral-500">
+                          {target.brand}
+                        </div>
+                        <div className="text-[16px] font-semibold text-neutral-900 leading-[1.4]">
+                          {target.name}
+                        </div>
+                      </div>
+                      <span className="text-neutral-400 text-[18px] flex-shrink-0">
+                        →
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </Section>
+        )}
+
         {/* CTA */}
         <div className="mt-12 flex flex-col gap-2.5">
           <Link
