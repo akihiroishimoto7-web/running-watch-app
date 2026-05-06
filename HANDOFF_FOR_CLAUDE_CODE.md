@@ -15,8 +15,10 @@ Claude Design にUI/UX案を依頼する場合は、別途 `HANDOFF_FOR_CLAUDE_D
 ## 作業フォルダ
 
 ```text
-C:\Users\akihi\Desktop\Codex,ランニングウォッチアプリ
+C:\Users\akihi\Desktop\ランニングウォッチアプリ
 ```
+
+※ 過去の引き継ぎメモで `Codex,ランニングウォッチアプリ` と記載されていましたが、実際の Git リポジトリと作業ファイルは上記（`Codex,` 接頭辞なし）にあります。
 
 ## 現在のブランチ
 
@@ -61,8 +63,7 @@ http://localhost:3000/review/forerunner-265/
 
 ### 初期移行
 
-- `Claude、ランニングウォッチアプリ` から `Codex,ランニングウォッチアプリ` に移行
-- Gitリポジトリ初期化
+- `ランニングウォッチアプリ` フォルダで Git リポジトリを初期化（過去のメモには `Codex,ランニングウォッチアプリ` への移行と書かれていたが、実態としてリポジトリは元フォルダ内にそのまま作成されています）
 - `.gitignore` 追加
 - `public/reviews/.gitkeep` 追加
 
