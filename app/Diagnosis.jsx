@@ -390,25 +390,27 @@ function Step1ResultScreen({ type, answers, onNext, onReset }) {
         </div>
       )}
 
-      <div className="mt-9 flex flex-col gap-2.5">
-        <button
-          onClick={onNext}
-          className="w-full bg-neutral-900 text-white rounded-2xl py-[16px] text-[15px] font-semibold active:scale-[0.98] hover:bg-neutral-800 transition"
-        >
-          おすすめモデルを見る
-        </button>
-        <Link
-          href="/compare/garmin-vs-applewatch/"
-          className="w-full text-center bg-white border border-neutral-200 text-neutral-900 rounded-2xl py-[16px] text-[15px] font-semibold active:scale-[0.98] hover:border-neutral-900 hover:bg-neutral-50 transition"
-        >
-          GarminとApple Watchの詳しい比較を読む
-        </Link>
-        <button
-          onClick={onReset}
-          className="w-full text-neutral-500 py-3 text-[14px] hover:text-neutral-900 transition"
-        >
-          もう一度診断する
-        </button>
+      <div className="sticky bottom-0 -mx-6 px-6 pt-4 pb-safe bg-white border-t border-neutral-100 mt-8">
+        <div className="flex flex-col gap-2.5">
+          <button
+            onClick={onNext}
+            className="w-full bg-neutral-900 text-white rounded-2xl py-[16px] text-[15px] font-semibold active:scale-[0.98] hover:bg-neutral-800 transition"
+          >
+            おすすめモデルを見る
+          </button>
+          <Link
+            href="/compare/garmin-vs-applewatch/"
+            className="w-full text-center bg-white border border-neutral-200 text-neutral-900 rounded-2xl py-[16px] text-[15px] font-semibold active:scale-[0.98] hover:border-neutral-900 hover:bg-neutral-50 transition"
+          >
+            GarminとApple Watchの詳しい比較を読む
+          </Link>
+          <button
+            onClick={onReset}
+            className="w-full text-neutral-500 py-3 text-[14px] hover:text-neutral-900 transition"
+          >
+            もう一度診断する
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -470,30 +472,6 @@ function FinalResultScreen({ model, step1Type, onReset }) {
         </p>
       </div>
 
-      <div className="mt-9 flex flex-col gap-2.5">
-        {model.links.review && model.links.review !== "#" ? (
-          <Link
-            href={model.links.review}
-            className="w-full text-center bg-neutral-900 text-white rounded-2xl py-[16px] text-[15px] font-semibold active:scale-[0.98] hover:bg-neutral-800 transition"
-          >
-            詳しいレビューを見る
-          </Link>
-        ) : (
-          <div
-            aria-disabled="true"
-            className="w-full text-center bg-neutral-100 text-neutral-400 rounded-2xl py-[16px] text-[15px] font-semibold cursor-not-allowed select-none"
-          >
-            詳しいレビューを見る（準備中）
-          </div>
-        )}
-        <button
-          onClick={onReset}
-          className="w-full text-neutral-500 py-3 text-[14px] hover:text-neutral-900 transition"
-        >
-          もう一度診断する
-        </button>
-      </div>
-
       <div className="mt-6 text-center text-[11px] text-neutral-400 tracking-wide">
         STEP 1：
         {step1Type === "garmin"
@@ -502,6 +480,32 @@ function FinalResultScreen({ model, step1Type, onReset }) {
             ? "Apple Watch タイプ"
             : "中間タイプ"}{" "}
         ／ STEP 2：{model.name}
+      </div>
+
+      <div className="sticky bottom-0 -mx-6 px-6 pt-4 pb-safe bg-white border-t border-neutral-100 mt-8">
+        <div className="flex flex-col gap-2.5">
+          {model.links.review && model.links.review !== "#" ? (
+            <Link
+              href={model.links.review}
+              className="w-full text-center bg-neutral-900 text-white rounded-2xl py-[16px] text-[15px] font-semibold active:scale-[0.98] hover:bg-neutral-800 transition"
+            >
+              詳しいレビューを見る
+            </Link>
+          ) : (
+            <div
+              aria-disabled="true"
+              className="w-full text-center bg-neutral-100 text-neutral-400 rounded-2xl py-[16px] text-[15px] font-semibold cursor-not-allowed select-none"
+            >
+              詳しいレビューを見る（準備中）
+            </div>
+          )}
+          <button
+            onClick={onReset}
+            className="w-full text-neutral-500 py-3 text-[14px] hover:text-neutral-900 transition"
+          >
+            もう一度診断する
+          </button>
+        </div>
       </div>
     </div>
   );
