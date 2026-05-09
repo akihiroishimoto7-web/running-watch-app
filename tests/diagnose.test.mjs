@@ -92,21 +92,28 @@ test("diagnoseStep2 ルール2: Q1=YES & Q5=YES & Q4=NO → garmin165", () => {
   );
 });
 
-test("diagnoseStep2 ルール3: Q1=NO & Q3=YES & Q5=NO → garmin965", () => {
+test("diagnoseStep2 ルール3: Q1=NO & Q2=YES & Q3=YES & Q5=NO → garmin570", () => {
   assert.equal(
     diagnoseStep2(["NO", "YES", "YES", "NO", "NO"], "garmin"),
+    "garmin570",
+  );
+});
+
+test("diagnoseStep2 ルール4: Q1=NO & Q3=YES & Q5=NO (Q2=NO で570回避) → garmin965", () => {
+  assert.equal(
+    diagnoseStep2(["NO", "NO", "YES", "NO", "NO"], "garmin"),
     "garmin965",
   );
 });
 
-test("diagnoseStep2 ルール4: Q2=YES & Q3=YES (Q1=YES で前ルール回避) → garmin265", () => {
+test("diagnoseStep2 ルール5: Q2=YES & Q3=YES (Q1=YES で前ルール回避) → garmin265", () => {
   assert.equal(
     diagnoseStep2(["YES", "YES", "YES", "NO", "NO"], "garmin"),
     "garmin265",
   );
 });
 
-test("diagnoseStep2 ルール5: Q1=NO & Q5=YES & Q4=NO (Q3=NO で前ルール回避) → corosPace4", () => {
+test("diagnoseStep2 ルール6: Q1=NO & Q5=YES & Q4=NO (Q3=NO で前ルール回避) → corosPace4", () => {
   assert.equal(
     diagnoseStep2(["NO", "NO", "NO", "NO", "YES"], "garmin"),
     "corosPace4",
@@ -120,6 +127,7 @@ test("diagnoseStep2 ルール5: Q1=NO & Q5=YES & Q4=NO (Q3=NO で前ルール回
 const VALID_MODELS = new Set([
   "garmin165",
   "garmin265",
+  "garmin570",
   "garmin965",
   "corosPace4",
   "appleWatch",

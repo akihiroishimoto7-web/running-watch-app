@@ -182,6 +182,21 @@ export const models = {
       review: "/review/forerunner-265/",
     },
   },
+  garmin570: {
+    id: "garmin570",
+    name: "Garmin Forerunner 570",
+    brand: "Garmin",
+    catch: "手首だけでランニングダイナミクス。265の次、965未満の実力機。",
+    reasons: [
+      "追加センサーなしで手首からランニングダイナミクスを計測できる",
+      "地図機能内蔵で知らないコースやトレイルも安心",
+      "マルチバンドGPS＋AMOLEDで精度と視認性を両立",
+    ],
+    notFor: "ウルトラや100マイル規模のレースを走る人・価格を抑えたい人",
+    links: {
+      review: "/review/forerunner-570/",
+    },
+  },
   garmin965: {
     id: "garmin965",
     name: "Garmin Forerunner 965",
@@ -238,6 +253,7 @@ export function diagnoseStep2(answers, step1Type) {
   const score = {
     garmin165: 0,
     garmin265: 0,
+    garmin570: 0,
     garmin965: 0,
     corosPace4: 0,
     appleWatch: 0,
@@ -250,22 +266,26 @@ export function diagnoseStep2(answers, step1Type) {
     score.appleWatch += 1;
   } else {
     score.garmin265 += 1;
+    score.garmin570 += 1;
     score.garmin965 += 2;
   }
 
   // Q2：サブ4・自己ベスト
   if (q2 === "YES") {
     score.garmin265 += 2;
-    score.garmin965 += 2;
+    score.garmin570 += 2;
+    score.garmin965 += 1;
     score.corosPace4 += 1;
   } else {
     score.garmin165 += 1;
+    score.garmin965 += 2; // Q2=NO → ウルトラ/アドベンチャー志向で965が浮上
     score.appleWatch += 2;
   }
 
   // Q3：データ分析
   if (q3 === "YES") {
     score.garmin265 += 2;
+    score.garmin570 += 2;
     score.garmin965 += 3;
     score.corosPace4 += 1;
   } else {
@@ -279,6 +299,7 @@ export function diagnoseStep2(answers, step1Type) {
     score.garmin165 += 1;
   } else {
     score.garmin265 += 1;
+    score.garmin570 += 1;
     score.garmin965 += 1;
     score.corosPace4 += 1;
   }
@@ -288,6 +309,7 @@ export function diagnoseStep2(answers, step1Type) {
     score.garmin165 += 2;
     score.corosPace4 += 2;
   } else {
+    score.garmin570 += 2;
     score.garmin965 += 2;
     score.garmin265 += 1;
     score.appleWatch += 1;
@@ -297,6 +319,7 @@ export function diagnoseStep2(answers, step1Type) {
   if (step1Type === "garmin") {
     score.garmin165 += 1;
     score.garmin265 += 1;
+    score.garmin570 += 1;
     score.garmin965 += 1;
     score.corosPace4 += 1;
   } else if (step1Type === "apple") {
@@ -308,11 +331,13 @@ export function diagnoseStep2(answers, step1Type) {
   if (q4 === "YES" && q3 === "NO") return "appleWatch";
   // 2. 初心者 × 価格抑えたい × 普段使いそこまで → Garmin 165
   if (q1 === "YES" && q5 === "YES" && q4 === "NO") return "garmin165";
-  // 3. ガチ勢（経験者×分析×価格こだわらない）→ Garmin 965
+  // 3. 経験者 × サブ4目標 × 分析 × 価格こだわらない → Garmin 570
+  if (q1 === "NO" && q2 === "YES" && q3 === "YES" && q5 === "NO") return "garmin570";
+  // 4. 経験者 × 分析 × 価格こだわらない（Q2=NOのウルトラ/上級者）→ Garmin 965
   if (q1 === "NO" && q3 === "YES" && q5 === "NO") return "garmin965";
-  // 4. サブ4×分析 → Garmin 265
+  // 5. サブ4×分析 → Garmin 265
   if (q2 === "YES" && q3 === "YES") return "garmin265";
-  // 5. 軽さ×コスパ（価格抑えたい×経験者）→ COROS PACE 4
+  // 6. 軽さ×コスパ（価格抑えたい×経験者）→ COROS PACE 4
   if (q1 === "NO" && q5 === "YES" && q4 === "NO") return "corosPace4";
 
   // それ以外はスコア最大値で決定
