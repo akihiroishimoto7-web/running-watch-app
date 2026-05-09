@@ -15,6 +15,11 @@ export default function sitemap() {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      path: "/compare/all/",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 
   const reviewRoutes = reviewSlugs.map((slug) => ({
