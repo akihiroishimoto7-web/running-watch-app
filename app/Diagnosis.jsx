@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   step1Questions,
@@ -21,6 +21,21 @@ export default function Diagnosis() {
   const [modelId, setModelId] = useState(null);
   const [currentQ, setCurrentQ] = useState(0);
 
+  // ?result=modelId&type=garmin 付きURLで結果画面を直接開けるようにする。
+  // ブログ記事から特定モデルの結果へ直リンクするための導線。
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const resultId = params.get("result");
+    const type = params.get("type");
+    if (resultId && models[resultId]) {
+      setModelId(resultId);
+      setStep1Type(
+        ["garmin", "apple", "middle"].includes(type) ? type : "garmin",
+      );
+      setPhase("step2Result");
+    }
+  }, []);
+
   const reset = () => {
     setPhase("intro");
     setStep1Answers([]);
@@ -28,9 +43,21 @@ export default function Diagnosis() {
     setStep1Type(null);
     setModelId(null);
     setCurrentQ(0);
+    // 共有URL経由で開いた場合、リロードで結果画面に戻らないようクエリを消す
+    if (window.location.search) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  };
+
+  // 選択時の軽い触覚フィードバック（対応端末のみ）
+  const vibrate = () => {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      navigator.vibrate(10);
+    }
   };
 
   const onStep1Answer = (optionIndex) => {
+    vibrate();
     const next = [...step1Answers, optionIndex];
     if (next.length === step1Questions.length) {
       setStep1Answers(next);
@@ -44,6 +71,7 @@ export default function Diagnosis() {
   };
 
   const onStep2Answer = (yesNo) => {
+    vibrate();
     const next = [...step2Answers, yesNo];
     if (next.length === step2Questions.length) {
       setStep2Answers(next);
@@ -88,6 +116,8 @@ export default function Diagnosis() {
             stepLabel="STEP 1 / 2 ・ タイプ診断"
             current={currentQ}
             total={step1Questions.length}
+            globalCurrent={currentQ}
+            globalTotal={step1Questions.length + step2Questions.length}
             question={step1Questions[currentQ]}
             onSelect={onStep1Answer}
             onBack={onStep1Back}
@@ -108,6 +138,8 @@ export default function Diagnosis() {
             stepLabel="STEP 2 / 2 ・ モデル診断"
             current={currentQ}
             total={step2Questions.length}
+            globalCurrent={step1Questions.length + currentQ}
+            globalTotal={step1Questions.length + step2Questions.length}
             question={step2Questions[currentQ]}
             onSelect={onStep2Answer}
             onBack={onStep2Back}
@@ -145,7 +177,7 @@ function BackButton({ onClick }) {
 // ------------------------------------------------------
 // 共通：ヘッダー（ステップ名 + 進捗）
 // ------------------------------------------------------
-function StepHeader({ stepLabel, current, total }) {
+function StepHeader({ stepLabel, current, total, globalCurrent, globalTotal }) {
   const pct = Math.min(100, Math.round(((current + 1) / total) * 100));
   return (
     <div>
@@ -156,6 +188,11 @@ function StepHeader({ stepLabel, current, total }) {
         <span className="text-[12px] font-medium tabular-nums text-neutral-700">
           {current + 1}{" "}
           <span className="text-neutral-400">/ {total}</span>
+          {globalTotal != null && (
+            <span className="ml-2 text-[11px] text-neutral-400">
+              全体 {globalCurrent + 1} / {globalTotal}
+            </span>
+          )}
         </span>
       </div>
       <div className="h-[3px] bg-neutral-100 rounded-full overflow-hidden">
@@ -227,6 +264,8 @@ function ChoiceQuestionScreen({
   stepLabel,
   current,
   total,
+  globalCurrent,
+  globalTotal,
   question,
   onSelect,
   onBack,
@@ -234,7 +273,13 @@ function ChoiceQuestionScreen({
   return (
     <div className="flex-1 flex flex-col">
       <BackButton onClick={onBack} />
-      <StepHeader stepLabel={stepLabel} current={current} total={total} />
+      <StepHeader
+        stepLabel={stepLabel}
+        current={current}
+        total={total}
+        globalCurrent={globalCurrent}
+        globalTotal={globalTotal}
+      />
 
       <div
         key={question.id}
@@ -272,6 +317,8 @@ function YesNoQuestionScreen({
   stepLabel,
   current,
   total,
+  globalCurrent,
+  globalTotal,
   question,
   onSelect,
   onBack,
@@ -279,7 +326,13 @@ function YesNoQuestionScreen({
   return (
     <div className="flex-1 flex flex-col">
       <BackButton onClick={onBack} />
-      <StepHeader stepLabel={stepLabel} current={current} total={total} />
+      <StepHeader
+        stepLabel={stepLabel}
+        current={current}
+        total={total}
+        globalCurrent={globalCurrent}
+        globalTotal={globalTotal}
+      />
 
       <div
         key={question.id}
@@ -288,6 +341,12 @@ function YesNoQuestionScreen({
         <h2 className="text-[24px] font-bold leading-[1.4] tracking-tight text-neutral-900">
           {question.question}
         </h2>
+
+        {question.help && (
+          <p className="mt-3 text-[13px] leading-[1.7] text-neutral-500">
+            {question.help}
+          </p>
+        )}
 
         <div className="mt-8 grid grid-cols-2 gap-3">
           <button
@@ -420,6 +479,30 @@ function Step1ResultScreen({ type, answers, onNext, onReset }) {
 // 最終結果（STEP2 後・モデル提案）
 // ------------------------------------------------------
 function FinalResultScreen({ model, step1Type, onReset }) {
+  const [copied, setCopied] = useState(false);
+
+  // 結果画面への直リンクを共有する。Web Share API 非対応環境では
+  // クリップボードにコピーして「コピーしました」を一時表示する。
+  const onShare = async () => {
+    const url = `${window.location.origin}/?result=${model.id}&type=${step1Type || "garmin"}`;
+    const text = `ランニングウォッチ診断の結果は「${model.name}」でした`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "ランニングウォッチ診断", text, url });
+      } catch {
+        // ユーザーが共有をキャンセルした場合は何もしない
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // クリップボード不可の環境では黙って何もしない
+    }
+  };
+
   return (
     <div className="flex-1 flex flex-col animate-fadeSlide">
       <div className="text-[11px] font-semibold tracking-[0.22em] text-neutral-500 mb-4 uppercase">
@@ -499,6 +582,12 @@ function FinalResultScreen({ model, step1Type, onReset }) {
               詳しいレビューを見る（準備中）
             </div>
           )}
+          <button
+            onClick={onShare}
+            className="w-full text-center bg-white border border-neutral-200 text-neutral-900 rounded-2xl py-[14px] text-[14px] font-semibold active:scale-[0.98] hover:border-neutral-900 hover:bg-neutral-50 transition"
+          >
+            {copied ? "リンクをコピーしました ✓" : "この結果をシェアする"}
+          </button>
           <button
             onClick={onReset}
             className="w-full text-neutral-500 py-3 text-[14px] hover:text-neutral-900 transition"
