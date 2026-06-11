@@ -9,6 +9,7 @@ import {
   models,
   diagnoseStep1,
   diagnoseStep2,
+  diagnoseStep2Detailed,
   getStep1Reason,
 } from "./data";
 
@@ -19,6 +20,7 @@ export default function Diagnosis() {
   const [step2Answers, setStep2Answers] = useState([]);
   const [step1Type, setStep1Type] = useState(null);
   const [modelId, setModelId] = useState(null);
+  const [matchPercent, setMatchPercent] = useState(null);
   const [currentQ, setCurrentQ] = useState(0);
 
   // ?result=modelId&type=garmin 付きURLで結果画面を直接開けるようにする。
@@ -42,6 +44,7 @@ export default function Diagnosis() {
     setStep2Answers([]);
     setStep1Type(null);
     setModelId(null);
+    setMatchPercent(null);
     setCurrentQ(0);
     // 共有URL経由で開いた場合、リロードで結果画面に戻らないようクエリを消す
     if (window.location.search) {
@@ -77,7 +80,9 @@ export default function Diagnosis() {
       setStep2Answers(next);
       // 中間タイプは Garmin 寄りに丸めて STEP2 ロジックに通す
       const baseType = step1Type === "middle" ? "garmin" : step1Type;
-      setModelId(diagnoseStep2(next, baseType));
+      const { modelId: mid, matchPercent: pct } = diagnoseStep2Detailed(next, baseType);
+      setModelId(mid);
+      setMatchPercent(pct);
       setPhase("step2Result");
       setCurrentQ(0);
     } else {
@@ -150,6 +155,7 @@ export default function Diagnosis() {
           <FinalResultScreen
             model={models[modelId]}
             step1Type={step1Type}
+            matchPercent={matchPercent}
             onReset={reset}
           />
         )}
@@ -478,11 +484,9 @@ function Step1ResultScreen({ type, answers, onNext, onReset }) {
 // ------------------------------------------------------
 // 最終結果（STEP2 後・モデル提案）
 // ------------------------------------------------------
-function FinalResultScreen({ model, step1Type, onReset }) {
+function FinalResultScreen({ model, step1Type, matchPercent, onReset }) {
   const [copied, setCopied] = useState(false);
 
-  // 結果画面への直リンクを共有する。Web Share API 非対応環境では
-  // クリップボードにコピーして「コピーしました」を一時表示する。
   const onShare = async () => {
     const url = `${window.location.origin}/?result=${model.id}&type=${step1Type || "garmin"}`;
     const text = `ランニングウォッチ診断の結果は「${model.name}」でした`;
@@ -490,7 +494,7 @@ function FinalResultScreen({ model, step1Type, onReset }) {
       try {
         await navigator.share({ title: "ランニングウォッチ診断", text, url });
       } catch {
-        // ユーザーが共有をキャンセルした場合は何もしない
+        // キャンセル時は何もしない
       }
       return;
     }
@@ -499,15 +503,19 @@ function FinalResultScreen({ model, step1Type, onReset }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // クリップボード不可の環境では黙って何もしない
+      // クリップボード不可環境では黙って何もしない
     }
   };
-
   return (
     <div className="flex-1 flex flex-col animate-fadeSlide">
       <div className="text-[11px] font-semibold tracking-[0.22em] text-neutral-500 mb-4 uppercase">
         あなたへのおすすめ
       </div>
+      {model.badge && (
+        <span className="self-start mb-3 inline-flex items-center text-[11px] font-semibold tracking-wide bg-neutral-900 text-white rounded-full px-3 py-1">
+          {model.badge}
+        </span>
+      )}
       <div className="text-[12px] text-neutral-500 mb-1.5">{model.brand}</div>
       <h2 className="text-[28px] font-bold tracking-tight leading-[1.25] text-neutral-900">
         {model.name}
@@ -515,6 +523,42 @@ function FinalResultScreen({ model, step1Type, onReset }) {
       <p className="mt-4 text-[15px] text-neutral-700 leading-[1.8]">
         {model.catch}
       </p>
+      {matchPercent && (
+        <div className="mt-5 bg-neutral-50 border border-neutral-200/70 rounded-2xl px-5 py-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[12px] font-semibold text-neutral-700">あなたへのマッチ度</span>
+            <span className="text-[18px] font-bold tabular-nums text-neutral-900">{matchPercent}%</span>
+          </div>
+          <div className="h-2 bg-neutral-200 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-neutral-900 rounded-full transition-all duration-700 ease-out"
+              style={{ width: `${matchPercent}%` }}
+            />
+          </div>
+        </div>
+      )}
+      {(model.price || model.battery || model.weight) && (
+        <div className="mt-3 grid grid-cols-3 gap-2">
+          {model.price && (
+            <div className="bg-white border border-neutral-200/70 rounded-xl px-3 py-3 text-center">
+              <div className="text-[10px] text-neutral-500 mb-1">参考価格</div>
+              <div className="text-[12px] font-semibold text-neutral-900 leading-tight">{model.price}</div>
+            </div>
+          )}
+          {model.battery && (
+            <div className="bg-white border border-neutral-200/70 rounded-xl px-3 py-3 text-center">
+              <div className="text-[10px] text-neutral-500 mb-1">バッテリー</div>
+              <div className="text-[12px] font-semibold text-neutral-900 leading-tight">{model.battery}</div>
+            </div>
+          )}
+          {model.weight && (
+            <div className="bg-white border border-neutral-200/70 rounded-xl px-3 py-3 text-center">
+              <div className="text-[10px] text-neutral-500 mb-1">重さ</div>
+              <div className="text-[12px] font-semibold text-neutral-900 leading-tight">{model.weight}</div>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="mt-5 bg-white border border-neutral-200 rounded-2xl p-5">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">

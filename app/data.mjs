@@ -160,6 +160,10 @@ export const models = {
     id: "garmin165",
     name: "Garmin Forerunner 165",
     brand: "Garmin",
+    badge: "初心者におすすめ",
+    price: "約44,000円",
+    battery: "最大11日",
+    weight: "約39g",
     catch: "初めての本格ランニングウォッチに、ちょうどいい1本。",
     reasons: [
       "必要な機能を厳選した、初心者にやさしい設計",
@@ -175,6 +179,10 @@ export const models = {
     id: "garmin265",
     name: "Garmin Forerunner 265",
     brand: "Garmin",
+    badge: "定番・バランス型",
+    price: "約64,000円",
+    battery: "最大13日",
+    weight: "約47g",
     catch: "サブ4・自己ベストを狙うランナーの定番。",
     reasons: [
       "トレーニング指標が一通り揃い、本格的な分析ができる",
@@ -190,6 +198,10 @@ export const models = {
     id: "garmin570",
     name: "Garmin Forerunner 570",
     brand: "Garmin",
+    badge: "265の上位・地図付き",
+    price: "約88,000円",
+    battery: "最大15日",
+    weight: "約53g",
     catch: "手首だけでランニングダイナミクス。265の次、965未満の実力機。",
     reasons: [
       "追加センサーなしで手首からランニングダイナミクスを計測できる",
@@ -205,6 +217,10 @@ export const models = {
     id: "garmin965",
     name: "Garmin Forerunner 965",
     brand: "Garmin",
+    badge: "上級者向け最高峰",
+    price: "約96,000円",
+    battery: "最大31日",
+    weight: "約53g",
     catch: "ガチ勢の最終形。長距離・分析・地図、全部のせ。",
     reasons: [
       "フルマラソン〜ウルトラまで耐えるバッテリー持ち",
@@ -220,6 +236,10 @@ export const models = {
     id: "corosPace4",
     name: "COROS PACE 4",
     brand: "COROS",
+    badge: "コスパNo.1",
+    price: "約36,000円",
+    battery: "最大24日",
+    weight: "約30g",
     catch: "AMOLED と長時間GPSを備えた、軽量コスパ機。",
     reasons: [
       "AMOLEDタッチスクリーンで視認性が大きく向上",
@@ -235,6 +255,10 @@ export const models = {
     id: "appleWatch",
     name: "Apple Watch",
     brand: "Apple",
+    badge: "日常使いに最強",
+    price: "約59,800円〜",
+    battery: "最大18時間",
+    weight: "約32g〜",
     catch: "走るし、鳴るし、決済もできる。続けるための1本。",
     reasons: [
       "iPhoneと完全連携で、通知・決済・音楽が一台で完結",
@@ -354,4 +378,39 @@ export function diagnoseStep2(answers, step1Type) {
     }
   }
   return bestId;
+}
+
+// diagnoseStep2 の拡張版：モデルIDに加えてマッチ度（%）も返す
+// マッチ度 = 1位スコアと2位スコアの差をもとに 72〜97% に正規化
+export function diagnoseStep2Detailed(answers, step1Type) {
+  const modelId = diagnoseStep2(answers, step1Type);
+
+  // スコア再計算（diagnoseStep2 内と同じロジック）
+  const [q1, q2, q3, q4, q5] = answers;
+  const score = {
+    garmin165: 0, garmin265: 0, garmin570: 0,
+    garmin965: 0, corosPace4: 0, appleWatch: 0,
+  };
+  if (q1 === "YES") { score.garmin165 += 2; score.corosPace4 += 1; score.appleWatch += 1; }
+  else { score.garmin265 += 1; score.garmin570 += 1; score.garmin965 += 2; }
+  if (q2 === "YES") { score.garmin265 += 2; score.garmin570 += 2; score.garmin965 += 1; score.corosPace4 += 1; }
+  else { score.garmin165 += 1; score.garmin965 += 2; score.appleWatch += 2; }
+  if (q3 === "YES") { score.garmin265 += 2; score.garmin570 += 2; score.garmin965 += 3; score.corosPace4 += 1; }
+  else { score.garmin165 += 1; score.appleWatch += 2; }
+  if (q4 === "YES") { score.appleWatch += 3; score.garmin165 += 1; }
+  else { score.garmin265 += 1; score.garmin570 += 1; score.garmin965 += 1; score.corosPace4 += 1; }
+  if (q5 === "YES") { score.garmin165 += 2; score.corosPace4 += 2; }
+  else { score.garmin570 += 2; score.garmin965 += 2; score.garmin265 += 1; score.appleWatch += 1; }
+  if (step1Type === "garmin") {
+    score.garmin165 += 1; score.garmin265 += 1; score.garmin570 += 1;
+    score.garmin965 += 1; score.corosPace4 += 1;
+  } else if (step1Type === "apple") { score.appleWatch += 2; }
+
+  const sorted = Object.values(score).sort((a, b) => b - a);
+  const top = sorted[0];
+  const second = sorted[1] ?? 0;
+  const gap = Math.max(0, top - second);
+  const matchPercent = Math.min(97, Math.round(72 + gap * 5));
+
+  return { modelId, matchPercent };
 }
