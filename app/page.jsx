@@ -1,4 +1,5 @@
 import Diagnosis from "./Diagnosis";
+import SiteFooter from "./SiteFooter";
 
 const SITE_URL = "https://runningwatchapps.netlify.app";
 
@@ -27,6 +28,7 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       <Diagnosis />
+      <SiteFooter />
     </>
   );
 }
