@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { models } from "../data.mjs";
+import { useCases, useCaseSlugs } from "../usecases";
 
 const SITE_URL = "https://runningwatchapps.netlify.app";
 
@@ -309,6 +310,32 @@ export default function GuidePage() {
               数グラムの差でも、長時間ランでは体感が変わります。軽量重視なら30g台のモデルを。
             </Pitfall>
           </ul>
+        </Section>
+
+        {/* 目的別から探す */}
+        <Section title="目的別に選ぶ">
+          <p className="text-[15px] text-neutral-700 leading-[1.9] mb-4">
+            自分の状況に近い記事から、おすすめモデルをまとめて確認できます。
+          </p>
+          <div className="flex flex-col gap-2.5">
+            {useCaseSlugs.map((s) => (
+              <Link
+                key={s}
+                href={`/for/${s}/`}
+                className="flex items-center justify-between bg-neutral-50 border border-neutral-200/70 rounded-2xl px-5 py-4 hover:border-neutral-900 transition"
+              >
+                <span>
+                  <span className="text-[11px] font-semibold tracking-wide text-neutral-500">
+                    {useCases[s].intentLabel}
+                  </span>
+                  <span className="block text-[14px] font-semibold text-neutral-900 mt-0.5">
+                    {useCases[s].title}
+                  </span>
+                </span>
+                <span className="text-neutral-300 flex-shrink-0">→</span>
+              </Link>
+            ))}
+          </div>
         </Section>
 
         {/* もっと比べる */}

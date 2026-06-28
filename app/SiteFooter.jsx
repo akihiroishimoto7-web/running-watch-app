@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { reviews } from "./reviews";
+import { useCases, useCaseSlugs } from "./usecases";
 
 // サーバーコンポーネントとして静的HTMLに内部リンクを焼き込む。
 // 診断UIはクライアント側でしか描画されないため、クローラー向けの
@@ -65,6 +66,23 @@ export default function SiteFooter() {
               ランニングウォッチ 6モデル比較
             </Link>
           </li>
+        </ul>
+
+        <div className="text-[11px] font-semibold tracking-[0.18em] text-neutral-400 uppercase mt-8 mb-4">
+          目的別おすすめ
+        </div>
+        <ul className="flex flex-col gap-2.5">
+          {useCaseSlugs.map((s) => (
+            <li key={s}>
+              <Link
+                href={`/for/${s}/`}
+                className="text-[13px] text-neutral-600 hover:text-neutral-900 transition flex items-baseline gap-2"
+              >
+                <span className="text-neutral-300">›</span>
+                {useCases[s].title}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         <div className="mt-8 pt-6 border-t border-neutral-200/70 text-[11px] text-neutral-400 leading-[1.8]">

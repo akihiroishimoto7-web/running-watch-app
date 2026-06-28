@@ -1,4 +1,5 @@
 import { reviewSlugs } from "./reviews";
+import { useCaseSlugs } from "./usecases";
 
 const baseUrl = "https://runningwatchapps.netlify.app";
 const lastModified = new Date("2026-05-02T00:00:00+09:00");
@@ -33,7 +34,13 @@ export default function sitemap() {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...reviewRoutes].map((route) => ({
+  const useCaseRoutes = useCaseSlugs.map((slug) => ({
+    path: `/for/${slug}/`,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...reviewRoutes, ...useCaseRoutes].map((route) => ({
     url: `${baseUrl}${route.path}`,
     lastModified,
     changeFrequency: route.changeFrequency,
