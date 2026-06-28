@@ -4,11 +4,13 @@ export const metadata = {
   title: "ランニングウォッチ 6モデル比較 | Garmin・COROS・Apple Watch",
   description:
     "Garmin Forerunner 165 / 265 / 570 / 965、COROS PACE 4、Apple Watch を価格・バッテリー・GPS・機能で横並び比較。あなたに合うモデルがひと目でわかります。",
+  alternates: { canonical: "/compare/all/" },
   openGraph: {
     title: "ランニングウォッチ 6モデル比較",
     description:
       "Garmin・COROS・Apple Watch の主要6モデルを一覧比較。価格・GPS精度・バッテリー・地図機能を横並びで確認できます。",
     type: "article",
+    url: "/compare/all/",
   },
 };
 

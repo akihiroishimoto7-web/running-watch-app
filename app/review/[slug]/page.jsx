@@ -14,10 +14,19 @@ export function generateMetadata({ params }) {
   return {
     title: `${r.name} レビュー | ランニングウォッチ診断`,
     description: r.tagline + " " + r.hero.slice(0, 90),
+    alternates: { canonical: `/review/${r.slug}/` },
     openGraph: {
       title: `${r.name} レビュー`,
       description: r.tagline,
       type: "article",
+      url: `/review/${r.slug}/`,
+      images: [{ url: r.image, width: 1200, height: 630, alt: r.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${r.name} レビュー`,
+      description: r.tagline,
+      images: [r.image],
     },
   };
 }

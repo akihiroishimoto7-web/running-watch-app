@@ -4,11 +4,13 @@ export const metadata = {
   title: "Garmin と Apple Watch の違い | ランニングウォッチ診断",
   description:
     "Garmin と Apple Watch の違いを、ランニング初心者からサブ4挑戦層向けに比較。走力を伸ばしたい人、普段使いを重視したい人、それぞれに合う選び方を解説します。",
+  alternates: { canonical: "/compare/garmin-vs-applewatch/" },
   openGraph: {
     title: "Garmin と Apple Watch の違い",
     description:
       "ランニングウォッチとして選ぶなら、Garmin と Apple Watch のどちらが合うかを比較します。",
     type: "article",
+    url: "/compare/garmin-vs-applewatch/",
   },
 };
 

@@ -26,6 +26,24 @@ export const metadata = {
     description:
       "Garmin と Apple Watch、あなたに合うのは？2ステップであなたにぴったりの1本を診断します。",
     type: "website",
+    url: "/",
+    siteName: "ランニングウォッチ診断",
+    locale: "ja_JP",
+    images: [
+      {
+        url: "/reviews/forerunner-265.png",
+        width: 1200,
+        height: 630,
+        alt: "ランニングウォッチ診断",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ランニングウォッチ診断 | Garmin vs Apple Watch",
+    description:
+      "Garmin と Apple Watch、あなたに合うのは？2ステップであなたにぴったりの1本を診断します。",
+    images: ["/reviews/forerunner-265.png"],
   },
 };
 
