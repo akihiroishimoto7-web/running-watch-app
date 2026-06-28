@@ -359,6 +359,15 @@ export default function GuidePage() {
               </span>
               <span className="text-neutral-300">→</span>
             </Link>
+            <Link
+              href="/glossary/"
+              className="flex items-center justify-between bg-white border border-neutral-200 rounded-2xl px-5 py-4 hover:border-neutral-900 transition"
+            >
+              <span className="text-[14px] font-semibold text-neutral-900">
+                専門用語をやさしく解説（用語集）
+              </span>
+              <span className="text-neutral-300">→</span>
+            </Link>
           </div>
         </Section>
 

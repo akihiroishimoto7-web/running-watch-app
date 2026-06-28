@@ -26,6 +26,11 @@ export default function sitemap() {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      path: "/glossary/",
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
   ];
 
   const reviewRoutes = reviewSlugs.map((slug) => ({

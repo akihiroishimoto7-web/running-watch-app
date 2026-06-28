@@ -66,6 +66,15 @@ export default function SiteFooter() {
               ランニングウォッチ 6モデル比較
             </Link>
           </li>
+          <li>
+            <Link
+              href="/glossary/"
+              className="text-[13px] text-neutral-600 hover:text-neutral-900 transition flex items-baseline gap-2"
+            >
+              <span className="text-neutral-300">›</span>
+              ランニングウォッチ用語集
+            </Link>
+          </li>
         </ul>
 
         <div className="text-[11px] font-semibold tracking-[0.18em] text-neutral-400 uppercase mt-8 mb-4">
