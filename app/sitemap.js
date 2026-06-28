@@ -11,6 +11,11 @@ export default function sitemap() {
       priority: 1,
     },
     {
+      path: "/guide/",
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       path: "/compare/garmin-vs-applewatch/",
       changeFrequency: "monthly",
       priority: 0.8,

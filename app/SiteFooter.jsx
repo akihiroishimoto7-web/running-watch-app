@@ -35,9 +35,18 @@ export default function SiteFooter() {
         </ul>
 
         <div className="text-[11px] font-semibold tracking-[0.18em] text-neutral-400 uppercase mt-8 mb-4">
-          比較記事
+          ガイド・比較記事
         </div>
         <ul className="flex flex-col gap-2.5">
+          <li>
+            <Link
+              href="/guide/"
+              className="text-[13px] text-neutral-600 hover:text-neutral-900 transition flex items-baseline gap-2"
+            >
+              <span className="text-neutral-300">›</span>
+              ランニングウォッチの選び方 完全ガイド
+            </Link>
+          </li>
           <li>
             <Link
               href="/compare/garmin-vs-applewatch/"
