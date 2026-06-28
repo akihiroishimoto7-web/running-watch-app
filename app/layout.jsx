@@ -1,6 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
+  metadataBase: new URL("https://runningwatchapps.netlify.app"),
+  alternates: { canonical: "/" },
   title: "ランニングウォッチ診断 | Garmin と Apple Watch、あなたに合うのは？",
   description:
     "Garmin Apple Watch 比較診断。初心者〜サブ4ランナー向けに、最適なランニングウォッチを2ステップで診断します。Forerunner 165 / 265 / 570 / 965、COROS PACE 4、Apple Watchから最適モデルを提案。",
@@ -43,6 +45,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   viewportFit: "cover",
+  themeColor: "#0a0a0a",
 };
 
 export default function RootLayout({ children }) {
